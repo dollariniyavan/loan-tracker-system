@@ -1,0 +1,92 @@
+/* Gram Finance shared theme overrides */
+:root {
+    --canvas: #f6f8fa;
+    --surface: #ffffff;
+    --ink: #172c35;
+    --muted: #687984;
+    --line: #e1e8ec;
+    --green: #087f65;
+    --green-soft: #e7f4ef;
+}
+
+body {
+    background: var(--canvas) !important;
+    color: var(--ink) !important;
+}
+
+/* Keep every ledger table consistent with the dashboard theme. */
+.ledger-panel .table,
+.ledger-panel .table > :not(caption) > * > * {
+    color: var(--ink) !important;
+    border-color: var(--line) !important;
+}
+
+.ledger-panel .table thead th,
+.ledger-panel .table thead.table-dark th {
+    background: var(--surface) !important;
+    color: var(--ink) !important;
+    border-bottom: 2px solid var(--line) !important;
+    font-weight: 700;
+}
+
+.ledger-panel .table-striped > tbody > tr:nth-of-type(odd) > * {
+    background: color-mix(in srgb, var(--surface) 96%, var(--canvas)) !important;
+}
+
+.ledger-panel .table-striped > tbody > tr:hover > * {
+    background: var(--green-soft) !important;
+}
+
+.btn-primary,
+.btn-success,
+.modal .btn-primary,
+.modal .btn-success {
+    background: var(--green) !important;
+    border-color: var(--green) !important;
+}
+
+.btn-primary:hover,
+.btn-success:hover,
+.modal .btn-primary:hover,
+.modal .btn-success:hover {
+    background: #066a55 !important;
+    border-color: #066a55 !important;
+}
+
+.form-control,
+.form-select {
+    color: var(--ink) !important;
+    background-color: var(--surface) !important;
+    border-color: var(--line) !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--green) !important;
+    box-shadow: 0 0 0 .2rem rgba(8, 127, 101, .15) !important;
+}
+
+.theme-dark {
+    --canvas: #172126;
+    --surface: #202d33;
+    --ink: #edf5f3;
+    --muted: #a9b8bd;
+    --line: #34444b;
+    --green-soft: #21483f;
+}
+
+.theme-dark .ledger-panel .table-striped > tbody > tr:nth-of-type(odd) > * {
+    background: color-mix(in srgb, var(--surface) 92%, var(--canvas)) !important;
+}
+
+.theme-dark .ledger-panel .table-striped > tbody > tr:hover > * {
+    background: #285247 !important;
+}
+
+.theme-dark .btn-outline-secondary,
+.theme-dark .table,
+.theme-dark .table th,
+.theme-dark .table td {
+    color: var(--ink) !important;
+    border-color: var(--line) !important;
+}
