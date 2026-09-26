@@ -223,7 +223,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <meta charset="UTF-8">
                     <meta name="viewport" content="width=device-width, initial-scale=1">
                     <title>Record Receipt</title>
-                    <style>body{font:15px Arial,sans-serif;margin:32px;color:#172c35}h1{font-size:22px}table{border-collapse:collapse;width:100%;margin:22px 0}th,td{border:1px solid #dbe3e7;padding:9px;text-align:left}th{width:35%}.return-link{color:#087f65}</style>
+                    <style>body{font:15px Arial,sans-serif;margin:32px;color:#172c35}h1{font-size:22px}table{border-collapse:collapse;width:100%;margin:22px 0}th,td{border:1px solid #dbe3e7;padding:9px}a{return:link;color:#087f65}</style>
                 </head>
                 <body data-return-url="<?= htmlspecialchars($returnUrl, ENT_QUOTES, 'UTF-8') ?>">
                     <h1>Gram Finance - <?= htmlspecialchars(ucwords(str_replace('_', ' ', $table))) ?> Receipt</h1>
@@ -261,7 +261,6 @@ function fetchAllTable($pdo, $table){
     return $stmt->fetchAll();
 }
 
-// AJAX record lookup and search
 if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     $table = $_GET['table'] ?? '';
     if (!isset($tables[$table])) {
@@ -416,7 +415,7 @@ function renderSummaryMetric($icon, $label, $value, $tone = 'green'){
         .modal .btn { font-size: 11px; }
         .modal .btn-primary, .modal .btn-success { background: var(--green); border-color: var(--green); }
         .modal-description { margin: 3px 0 0; color: var(--muted); font-size: 11px; line-height: 1.45; }
-        .record-details-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; margin: 2px 0 0; padding: 14px 16px; border: 1px solid var(--line); border-radius: 11px; background: color-mix(in srgb, var(--canvas) 60%, var(--surface)); }
+        .record-details-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; margin: 2px 0 0; padding: 14px 16px; border: 1px solid var(--line); border-radius: 11px; background: color-mix(in srgb, var(--surface) 96%, var(--canvas)); }
         .record-detail { min-width: 0; padding: 5px 0 8px; }
         .record-detail dt { margin-bottom: 3px; color: var(--green); font-size: 9px; font-weight: 700; text-transform: uppercase; }
         .record-detail dd { margin: 0; overflow-wrap: anywhere; color: var(--ink); font-size: 12px; }
@@ -435,18 +434,18 @@ function renderSummaryMetric($icon, $label, $value, $tone = 'green'){
         .payment-context-item span { display: block; margin-bottom: 3px; color: var(--green); font-size: 9px; font-weight: 700; text-transform: uppercase; }
         .payment-context-item strong { color: var(--ink); font-size: 11px; font-weight: 500; }
         .overview-hero { padding: 22px 24px; border: 1px solid var(--line); border-radius: 13px; background: linear-gradient(115deg, #eefaf5 0%, #fffdf4 100%); box-shadow: 0 2px 5px rgba(23,44,53,.05); }
-        .overview-date { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); background: rgba(255,255,255,.8); border: 1px solid var(--line); border-radius: 16px; padding: 4px 9px; font-size: 10px; }
+        .overview-date { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); background: rgba(255,255,255,.8); border: 1px solid var(--line); border-radius: 16px; padding: 4px 9px; font-size: 10px; font-weight: 600; }
         .overview-hero h1 { margin: 10px 0 3px; color: var(--ink); font-size: 25px; font-weight: 750; }
         .overview-hero p { max-width: 570px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
         .metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 20px 0; }
-        .metric { min-width: 0; display: flex; align-items: center; gap: 10px; padding: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 2px 5px rgba(23,44,53,.04); }
+        .metric { min-width: 0; display: flex; align-items: center; gap: 10px; padding: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 2px 5px rgba(23,44,53,.03); }
         .metric-icon, .section-icon { flex: 0 0 auto; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 9px; color: var(--green); background: var(--green-soft); }
         .metric-icon-orange { color: #bd681f; background: #fff6e8; }
         .metric-icon-slate { color: #536779; background: #eef2f6; }
         .metric-label { color: var(--muted); font-size: 9px; line-height: 1.2; text-transform: uppercase; }
         .metric-value { display: block; margin-top: 4px; color: var(--ink); font-size: 14px; font-weight: 700; white-space: nowrap; }
         .section-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-        .section-card { min-height: 208px; display: flex; flex-direction: column; padding: 16px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 2px 5px rgba(23,44,53,.05); text-decoration: none; transition: transform .16s ease, box-shadow .16s ease; }
+        .section-card { min-height: 208px; display: flex; flex-direction: column; padding: 16px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 2px 5px rgba(23,44,53,.03); text-decoration: none; transition: transform .15s ease, box-shadow .15s ease; }
         .section-card:hover { color: var(--ink); transform: translateY(-2px); box-shadow: 0 6px 14px rgba(23,44,53,.09); }
         .section-card-top { display: flex; align-items: center; justify-content: space-between; }
         .section-card-top > i { color: var(--muted); font-size: 12px; }
@@ -470,7 +469,7 @@ function renderSummaryMetric($icon, $label, $value, $tone = 'green'){
         .module-heading p { max-width: 650px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
         .module-metrics { margin: 0 0 16px; }
         .ledger-panel { padding: 0 !important; background: transparent; border: 0; box-shadow: none; }
-        .ledger-panel > .d-flex:first-child { margin: 0 0 14px !important; padding: 10px 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 11px; box-shadow: 0 2px 5px rgba(23,44,53,.04); }
+        .ledger-panel > .d-flex:first-child { margin: 0 0 14px !important; padding: 10px 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 11px; box-shadow: 0 2px 5px rgba(23,44,53,.03); }
         .ledger-panel > .d-flex:first-child h4 { display: none; }
         .ledger-toolbar { min-width: 0; flex: 1; display: flex; align-items: center; gap: 8px; }
         .ledger-toolbar .form-control, .ledger-toolbar .form-select { min-width: 0; height: 34px; font-size: 11px; }
@@ -503,6 +502,18 @@ function renderSummaryMetric($icon, $label, $value, $tone = 'green'){
             .ledger-toolbar .form-select { flex: 1; }
             .record-details-grid, .payment-context { grid-template-columns: 1fr; }
         }
+
+        .ledger-panel .table thead th {
+            background: var(--surface) !important;
+            color: var(--ink) !important;
+            border-bottom: 2px solid var(--line) !important;
+        }
+        .ledger-panel .table-striped > tbody > tr:nth-of-type(odd) > * {
+            background: color-mix(in srgb, var(--surface) 96%, var(--canvas)) !important;
+        }
+        .ledger-panel .table-striped > tbody > tr:hover > * {
+            background: var(--green-soft) !important;
+        }
     </style>
 </head>
 <body>
@@ -534,14 +545,14 @@ function renderSummaryMetric($icon, $label, $value, $tone = 'green'){
         <section class="overview-hero">
             <span class="overview-date"><i class="fa-regular fa-calendar"></i> <?= date('j M Y') ?></span>
             <h1>Management Dashboard</h1>
-            <p>வட்டி கணக்கு, கடன் தவணைகள், வீட்டு வாடகை மற்றும் MOI பதிவுகளை ஒரே இடத்தில் நிர்வகிக்கவும்.</p>
+            <p>வட்டி கணக்கு, கடன் தவணைகள், வீட்டு வாடகை மற்றும் MOI பதிவுகளை ஒரே இடத்தில் கண்காணிக்கவும்.</p>
         </section>
 
         <section class="metric-grid" aria-label="Financial summary">
             <div class="metric"><span class="metric-icon"><i class="fa-solid fa-wallet"></i></span><span><span class="metric-label">Total Principal</span><strong class="metric-value"><?= formatINR($totalPrincipal) ?></strong></span></div>
-            <div class="metric"><span class="metric-icon" style="color:#bd681f;background:#fff6e8"><i class="fa-solid fa-arrow-trend-down"></i></span><span><span class="metric-label">Outstanding Balance</span><strong class="metric-value"><?= formatINR($totalOutstanding) ?></strong></span></div>
+            <div class="metric"><span class="metric-icon metric-icon-orange"><i class="fa-solid fa-arrow-trend-down"></i></span><span><span class="metric-label">Outstanding</span><strong class="metric-value"><?= formatINR($totalOutstanding) ?></strong></span></div>
             <div class="metric"><span class="metric-icon"><i class="fa-solid fa-chart-line"></i></span><span><span class="metric-label">Interest Collected</span><strong class="metric-value"><?= formatINR($interestCollected) ?></strong></span></div>
-            <div class="metric"><span class="metric-icon" style="color:#536779;background:#eef2f6"><i class="fa-solid fa-building-columns"></i></span><span><span class="metric-label">Borrower + Rent Pending</span><strong class="metric-value"><?= formatINR($borrowerPending + $rentPending) ?></strong></span></div>
+            <div class="metric"><span class="metric-icon metric-icon-slate"><i class="fa-solid fa-building-columns"></i></span><span><span class="metric-label">Borrowers + Rent</span><strong class="metric-value"><?= formatINR($borrowerPending + $rentPending) ?></strong></span></div>
         </section>
 
         <section class="section-grid" aria-label="Finance sections">
@@ -596,7 +607,7 @@ function renderSummaryMetric($icon, $label, $value, $tone = 'green'){
 
             <div class="table-responsive">
                 <table class="table table-bordered table-striped">
-                    <thead class="table-dark">
+                    <thead>
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
@@ -639,7 +650,6 @@ function renderSummaryMetric($icon, $label, $value, $tone = 'green'){
             </div>
         </div>
 
-        <!-- Add Modal -->
         <div class="modal fade" id="installmentAddModal" tabindex="-1">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -649,34 +659,12 @@ function renderSummaryMetric($icon, $label, $value, $tone = 'green'){
                     </div>
                     <form method="POST" action="">
                         <div class="modal-body row g-3">
-                            <div class="col-md-6">
-                                <label>Name</label>
-                                <input type="text" name="name" class="form-control" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label>Village</label>
-                                <input type="text" name="village" class="form-control" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label>Mobile</label>
-                                <input type="text" name="mobile" class="form-control" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label>Principal Amount</label>
-                                <input type="number" step="0.01" name="principal" class="form-control" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label>Payment Schedule</label>
-                                <select class="form-select" name="payment_schedule">
-                                    <option value="100_days">100 Days</option>
-                                    <option value="10_weeks">10 Weeks</option>
-                                    <option value="5_months">5 Months</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label>Date</label>
-                                <input type="date" name="payment_date" class="form-control" required>
-                            </div>
+                            <div class="col-md-6"><label>Name</label><input type="text" name="name" class="form-control" required></div>
+                            <div class="col-md-6"><label>Village</label><input type="text" name="village" class="form-control" required></div>
+                            <div class="col-md-6"><label>Mobile</label><input type="text" name="mobile" class="form-control" required></div>
+                            <div class="col-md-6"><label>Principal Amount</label><input type="number" step="0.01" name="principal" class="form-control" required></div>
+                            <div class="col-md-6"><label>Payment Schedule</label><select class="form-select" name="payment_schedule"><option value="100_days">100 Days</option><option value="10_weeks">10 Weeks</option><option value="5_months">5 Months</option></select></div>
+                            <div class="col-md-6"><label>Date</label><input type="date" name="payment_date" class="form-control" required></div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -752,7 +740,7 @@ function renderSummaryMetric($icon, $label, $value, $tone = 'green'){
 
             <div class="table-responsive">
                 <table class="table table-bordered table-striped">
-                    <thead class="table-dark">
+                    <thead>
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
@@ -885,7 +873,7 @@ function renderSummaryMetric($icon, $label, $value, $tone = 'green'){
 
             <div class="table-responsive">
                 <table class="table table-bordered table-striped">
-                    <thead class="table-dark">
+                    <thead>
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
@@ -1015,7 +1003,7 @@ function renderSummaryMetric($icon, $label, $value, $tone = 'green'){
 
             <div class="table-responsive">
                 <table class="table table-bordered table-striped">
-                    <thead class="table-dark">
+                    <thead>
                         <tr>
                             <th>ID</th>
                             <th>Name (Tamil)</th>
@@ -1128,7 +1116,7 @@ function renderSummaryMetric($icon, $label, $value, $tone = 'green'){
     <div class="modal fade" id="recordDetailsModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
-                <div class="modal-header"><div><h5 class="modal-title" id="recordDetailsTitle">Record details</h5><p class="modal-description" id="recordDetailsSubtitle">Record profile and current account information.</p></div><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-header"><div><h5 class="modal-title" id="recordDetailsTitle">Record details</h5><p class="modal-description" id="recordDetailsSubtitle">Record profile and current account summary.</p></div><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
                 <div class="modal-body"><div id="recordDetailsTabs"></div><div id="recordDetailsBody"></div></div>
                 <div class="record-details-actions" id="recordDetailsActions"></div>
             </div>
@@ -1163,7 +1151,7 @@ function renderSummaryMetric($icon, $label, $value, $tone = 'green'){
                         <input class="form-control" type="date" id="paymentDate" name="payment_date" value="<?= date('Y-m-d') ?>" required>
                     </div>
                 </div>
-                <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button><button type="submit" class="btn btn-outline-success" id="paymentSubmitButton" value="save">Save</button><button type="submit" class="btn btn-success" id="paymentPrintButton" value="print">Submit &amp; Print</button></div>
+                <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button><button type="submit" class="btn btn-outline-success" id="paymentSubmitButton">Save</button></div>
             </form>
         </div>
     </div>
@@ -1240,7 +1228,7 @@ function renderSummaryMetric($icon, $label, $value, $tone = 'green'){
     const numericFields = new Set(['principal','interest_rate','rental_amount','income','expenses']);
 
     function escapeHtml(value) {
-        return String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+        return String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[char]));
     }
     function fieldLabel(field) {
         return field.replaceAll('_', ' ').replace(/\b\w/g, char => char.toUpperCase());
@@ -1285,11 +1273,11 @@ function renderSummaryMetric($icon, $label, $value, $tone = 'green'){
         let content = '';
         if (table === 'interest_loans') {
             if (tab === 'interest') {
-                content = detailGrid([['Principal', formatMoney(record.principal_amount)], ['Rate of Interest', `${record.interest_rate}%`], ['Total Interest Collected', formatMoney(record.total_interest_collected)], ['Remaining Principal', formatMoney(record.remaining_principal)]]) + `<div class="record-history mt-3"><h6>Interest Collection</h6>${paymentHistoryTable(payments, ['interest'])}</div>`;
+                content = detailGrid([['Principal', formatMoney(record.principal_amount)], ['Rate of Interest', `${record.interest_rate}%`], ['Total Interest Collected', formatMoney(record.total_interest_collected)], ['No. of Payments', record.installments]]);
             } else if (tab === 'principal') {
-                content = detailGrid([['Original Principal', formatMoney(record.principal_amount)], ['Remaining Principal', formatMoney(record.remaining_principal)], ['No. of Payments', record.installments]]) + `<div class="record-history mt-3"><h6>Principal Collection</h6>${paymentHistoryTable(payments, ['principal'])}</div>`;
+                content = detailGrid([['Original Principal', formatMoney(record.principal_amount)], ['Remaining Principal', formatMoney(record.remaining_principal)], ['No. of Payments', record.installments], ['Last Payment Date', formatDisplayDate(record.loan_date)]]);
             } else {
-                content = detailGrid([['Name', record.name], ['Village', record.village], ['Mobile', record.mobile], ['Rate of Interest', `${record.interest_rate}%`], ['Principal', formatMoney(record.principal_amount)], ['Remaining Principal', formatMoney(record.remaining_principal)], ['Transaction Date', formatDisplayDate(record.loan_date)], ['No. of Payments', record.installments], ['Total Interest Collected', formatMoney(record.total_interest_collected)]]);
+                content = detailGrid([['Name', record.name], ['Village', record.village], ['Mobile', record.mobile], ['Rate of Interest', `${record.interest_rate}%`], ['Principal', formatMoney(record.principal_amount)], ['Remaining Principal', formatMoney(record.remaining_principal)]]);
             }
         } else if (table === 'installment_customers') {
             if (tab === 'history') {
@@ -1297,23 +1285,23 @@ function renderSummaryMetric($icon, $label, $value, $tone = 'green'){
             } else {
                 const collected = Number(record.principal) - Number(record.outstanding_amount);
                 const scheduleLabels = { '100_days': '100 Days', '10_weeks': '10 Weeks', '5_months': '5 Months' };
-                content = detailGrid([['Name', record.name], ['Village', record.village], ['Mobile', record.mobile], ['Payment Schedule', scheduleLabels[record.payment_schedule] || record.payment_schedule], ['Principal', formatMoney(record.principal)], ['Collected', formatMoney(collected)], ['Pending', formatMoney(record.outstanding_amount)], ['Suggested Installment', formatMoney(record.amount_due)], ['Transaction Date', formatDisplayDate(record.payment_date)], ['Day Count', record.days_count]]);
+                content = detailGrid([['Name', record.name], ['Village', record.village], ['Mobile', record.mobile], ['Payment Schedule', scheduleLabels[record.payment_schedule] || record.payment_schedule], ['Principal', formatMoney(record.principal)], ['Collected', formatMoney(collected)], ['Outstanding', formatMoney(record.outstanding_amount)]]);
             }
         } else if (table === 'house_rent') {
-            content = detailGrid([['Name', record.name], ['Village', record.village], ['Mobile', record.mobile], ['Rent Amount', formatMoney(record.rental_amount)], ['Agreement Date', formatDisplayDate(record.contract_date)], ['Status', record.status], ['Total Paid', formatMoney(record.paid_amount)], ['Balance', formatMoney(Math.max(0, Number(record.rental_amount) - Number(record.paid_amount)))]] ) + `<div class="record-history mt-3"><h6>Payment History</h6>${paymentHistoryTable(payments, ['rent'])}</div>`;
+            content = detailGrid([['Name', record.name], ['Village', record.village], ['Mobile', record.mobile], ['Rent Amount', formatMoney(record.rental_amount)], ['Agreement Date', formatDisplayDate(record.contract_date)], ['Status', record.status]]);
         } else {
-            content = detailGrid([['Name (Tamil)', record.name_tamil], ['Name (English)', record.name_english || record.name], ['Village (Tamil)', record.village_tamil], ['Village (English)', record.village_english || record.village_name], ['Mobile', record.mobile], ['Alternate Mobile', record.alternate_mobile], ['City', record.city], ['Income', formatMoney(record.income)], ['Expenditure', formatMoney(record.expenses)], ['Information', record.additional_info], ['Updated Details', record.updated_details]]);
+            content = detailGrid([['Name (Tamil)', record.name_tamil], ['Name (English)', record.name_english || record.name], ['Village (Tamil)', record.village_tamil], ['Village (English)', record.village_english || record.village_name], ['Mobile', record.mobile], ['City', record.city], ['Income', formatMoney(record.income)], ['Expenditure', formatMoney(record.expenses)]]);
         }
         document.getElementById('recordDetailsBody').innerHTML = content;
         document.getElementById('recordDetailsSubtitle').textContent = identity || `Record #${record.id}`;
 
         const actions = table === 'interest_loans'
-            ? `<button class="btn btn-outline-secondary" type="button" onclick="printRecord('${table}', ${Number(record.id)})"><i class="fa-solid fa-print"></i> Print Details</button><button class="btn btn-success" type="button" onclick="openPayment('${table}', ${Number(record.id)}, 'interest')">Interest Collection</button><button class="btn btn-outline-secondary" type="button" onclick="openPayment('${table}', ${Number(record.id)}, 'principal')">Principal Collection</button>`
+            ? `<button class="btn btn-outline-secondary" type="button" onclick="printRecord('${table}', ${Number(record.id)})"><i class="fa-solid fa-print"></i> Print Details</button><button class="btn btn-success" type="button" onclick="openPayment('${table}', ${Number(record.id)})"><i class="fa-solid fa-wallet"></i> Record Payment</button>`
             : table === 'installment_customers'
-                ? `<button class="btn btn-outline-secondary" type="button" onclick="printRecord('${table}', ${Number(record.id)})"><i class="fa-solid fa-print"></i> Print Details</button><button class="btn btn-success" type="button" onclick="openPayment('${table}', ${Number(record.id)})">Pay Due</button>`
+                ? `<button class="btn btn-outline-secondary" type="button" onclick="printRecord('${table}', ${Number(record.id)})"><i class="fa-solid fa-print"></i> Print Details</button><button class="btn btn-success" type="button" onclick="openPayment('${table}', ${Number(record.id)})"><i class="fa-solid fa-wallet"></i> Record Payment</button>`
                 : table === 'house_rent'
-                    ? `<button class="btn btn-outline-secondary" type="button" onclick="printRecord('${table}', ${Number(record.id)})"><i class="fa-solid fa-print"></i> Print</button><button class="btn btn-success" type="button" ${String(record.status).toLowerCase() === 'paid' ? 'disabled' : ''} onclick="openPayment('${table}', ${Number(record.id)})">Pay Rent</button>`
-                    : `<button class="btn btn-outline-secondary" type="button" onclick="printRecord('${table}', ${Number(record.id)})"><i class="fa-solid fa-print"></i> Print Details</button><button class="btn btn-success" type="button" onclick="openEditor('${table}', ${Number(record.id)})">Edit</button>`;
+                    ? `<button class="btn btn-outline-secondary" type="button" onclick="printRecord('${table}', ${Number(record.id)})"><i class="fa-solid fa-print"></i> Print</button><button class="btn btn-success" type="button" onclick="openPayment('${table}', ${Number(record.id)})"><i class="fa-solid fa-wallet"></i> Record Payment</button>`
+                    : `<button class="btn btn-outline-secondary" type="button" onclick="printRecord('${table}', ${Number(record.id)})"><i class="fa-solid fa-print"></i> Print Details</button>`;
         document.getElementById('recordDetailsActions').innerHTML = actions;
     }
     async function fetchRecord(table, id) {
@@ -1336,7 +1324,7 @@ function renderSummaryMetric($icon, $label, $value, $tone = 'green'){
         try {
             const record = await fetchRecord(table, id);
             const payments = await fetchPaymentHistory(table, id);
-            document.getElementById('recordDetailsTitle').textContent = table === 'house_rent' ? 'Rent Details' : table === 'installment_customers' ? 'Borrower Details' : table === 'interest_loans' ? 'Customer Details' : 'MOI Details';
+            document.getElementById('recordDetailsTitle').textContent = table === 'house_rent' ? 'Rent Details' : table === 'installment_customers' ? 'Borrower Details' : table === 'interest_loans' ? 'Interest Details' : 'MOI Details';
             renderRecordDetails(table, record, payments);
             bootstrap.Modal.getOrCreateInstance(document.getElementById('recordDetailsModal')).show();
         } catch (error) { showActionError(error); }
@@ -1404,12 +1392,12 @@ function renderSummaryMetric($icon, $label, $value, $tone = 'green'){
             document.getElementById('interestPaymentTypeWrap').classList.toggle('d-none', table !== 'interest_loans');
             document.getElementById('interestPaymentType').value = selectedPaymentType;
             document.getElementById('rentPaymentNotice').classList.toggle('d-none', !isRent);
-            document.getElementById('recordPaymentTitle').textContent = table === 'installment_customers' ? 'Pay Due' : table === 'interest_loans' ? (selectedPaymentType === 'interest' ? 'Interest Collection' : 'Principal Collection') : 'Pay Rent';
+            document.getElementById('recordPaymentTitle').textContent = table === 'installment_customers' ? 'Pay Due' : table === 'interest_loans' ? (selectedPaymentType === 'interest' ? 'Interest Collection' : 'Principal Collection') : 'Record Rent Payment';
             document.getElementById('paymentAmountLabel').textContent = table === 'installment_customers' ? 'Due Amount (₹)' : 'Amount (₹)';
             document.getElementById('paymentSubmitButton').textContent = 'Save';
             document.getElementById('paymentSubtitle').textContent = person || `Record #${record.id}`;
             const contextFields = table === 'installment_customers'
-                ? [['Principal', formatMoney(record.principal)], ['Collected', formatMoney(Number(record.principal) - Number(record.outstanding_amount))], ['Pending', formatMoney(record.outstanding_amount)], ['Suggested Installment', formatMoney(record.amount_due)]]
+                ? [['Principal', formatMoney(record.principal)], ['Collected', formatMoney(Number(record.principal) - Number(record.outstanding_amount))], ['Pending', formatMoney(record.outstanding_amount)], ['Payment Date', formatDisplayDate(record.payment_date)]]
                 : table === 'interest_loans'
                     ? [['Principal', formatMoney(record.principal_amount)], ['Rate of Interest', `${record.interest_rate}%`], ['Remaining Principal', formatMoney(record.remaining_principal)], ['Interest Collected', formatMoney(record.total_interest_collected)]]
                     : [['Rent Amount', formatMoney(record.rental_amount)], ['Collected', formatMoney(record.paid_amount)], ['Balance', formatMoney(remainingRent)], ['Agreement Date', formatDisplayDate(record.contract_date)]];
@@ -1456,7 +1444,7 @@ function renderSummaryMetric($icon, $label, $value, $tone = 'green'){
             if (!response.ok) throw new Error(result.error || 'Unable to apply payment.');
             if (printWindow) {
                 const paymentType = payload.payment_type || (payload.table === 'house_rent' ? 'rent' : 'installment');
-                printWindow.document.write(`<!doctype html><html><head><title>Payment Receipt</title><style>body{font:15px sans-serif;margin:32px;color:#172c35}h1{font-size:22px}table{border-collapse:collapse;width:100%;margin-top:24px}th,td{border:1px solid #dbe3e7;padding:10px;text-align:left}th{width:35%}</style></head><body><h1>Gram Finance - Payment Receipt</h1><table><tr><th>Receipt No.</th><td>${escapeHtml(result.payment_id)}</td></tr><tr><th>Account</th><td>${escapeHtml(recordLabels[payload.table])}</td></tr><tr><th>Customer</th><td>${escapeHtml(document.getElementById('paymentSubtitle').textContent)}</td></tr><tr><th>Payment Type</th><td>${escapeHtml(fieldLabel(paymentType))}</td></tr><tr><th>Amount</th><td>${escapeHtml(formatMoney(payload.amount))}</td></tr><tr><th>Date</th><td>${escapeHtml(formatDisplayDate(payload.payment_date))}</td></tr></table></body></html>`);
+                printWindow.document.write(`<!doctype html><html><head><title>Payment Receipt</title><style>body{font:15px sans-serif;margin:32px;color:#172c35}h1{font-size:22px}table{border-collapse:collapse;width:100%;margin:22px 0}th,td{border:1px solid #dbe3e7;padding:9px}table{margin-top:18px}</style></head><body><h1>Payment Receipt</h1><table><tr><th>Type</th><td>${paymentType}</td></tr><tr><th>Amount</th><td>₹${Number(payload.amount).toFixed(2)}</td></tr><tr><th>Date</th><td>${payload.payment_date}</td></tr></table></body></html>`);
                 printWindow.document.close();
                 printWindow.focus();
                 printWindow.print();
@@ -1470,7 +1458,7 @@ function renderSummaryMetric($icon, $label, $value, $tone = 'green'){
         try {
             const record = await fetchRecord(table, id);
             const rows = Object.entries(record).map(([key, value]) => `<tr><th>${escapeHtml(fieldLabel(key))}</th><td>${escapeHtml(value) || '-'}</td></tr>`).join('');
-            printWindow.document.write(`<!doctype html><html><head><title>${escapeHtml(recordLabels[table])} #${record.id}</title><style>body{font:16px sans-serif;margin:32px}table{border-collapse:collapse;width:100%}th,td{border:1px solid #bbb;padding:8px;text-align:left}th{width:35%}</style></head><body><h1>${escapeHtml(recordLabels[table])} #${record.id}</h1><table>${rows}</table></body></html>`);
+            printWindow.document.write(`<!doctype html><html><head><title>${escapeHtml(recordLabels[table])} #${record.id}</title><style>body{font:16px sans-serif;margin:32px}table{border-collapse:collapse;width:100%;margin:22px 0}th,td{border:1px solid #dbe3e7;padding:9px}</style></head><body><h1>${escapeHtml(recordLabels[table])} #${record.id}</h1><table>${rows}</table></body></html>`);
             printWindow.document.close();
             printWindow.focus();
             printWindow.print();
